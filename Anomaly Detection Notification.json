@@ -1,0 +1,35 @@
+{
+   "ruleActions":[
+      {
+         "tenantId":"AAA0004",
+         "policyId":"efb0e8a8-d77d-41d9-9060-7149ad1a7893",
+         "name":"Yanlin Anomaly Detection Notification",
+         "rule":{
+            "filterType":"com.centrify.platform.notification.rule.filter.RiskLevelFilter",
+            "filterMetaData":{
+               "risk_level":"Low",
+               "event_type":"SecurityAlert"
+            }
+         },
+         "actions":[
+            {
+               "actionType":"webhook",
+               "actionMetaData":{
+                  "headers":"",
+                  "method":"POST",
+                  "content_type":"application/json",
+                  "request_body":"{\n  \"Title\": \"Anomaly Detection Notification\",\n  \"User Name\": \"${user_name}\",\n  \"Server\": \"${target_address}\",\n  \"Risk Level\": \"${intel_risk_level}\",\n  \"Trigger Type\": \"${event_name}\",\n  \"OS Type\": \"${os_type}\",\n  \"Command\": \"${action}\",\n  \"Event Time\": \"${utils.number_to_datetime_timezone(event_time, 'US/Pacific')}\",\n  \"Text\": \"${intel_risk_level?cap_first} Risk: <#if event_name=='Cloud.Core.MfaSummary'>Service Login<#elseif event_name?starts_with('Cloud.Saas.Application')>Launched ${app_name}<#elseif event_name?ends_with('PasswordExport')>Requested Infrastructure credential checkout<#elseif event_name?ends_with('SessionStart')>Requested Infrastructure login<#elseif event_name?ends_with('CpsTileLaunch')>Infrastructure resource access to ${app_name}<#else>${event_name}<#if action?has_content> for command ${action}</#if> on ${target_address}</#if> from ${user_name} at ${utils.number_to_datetime_timezone(event_time, 'US/Pacific')}\",\n  \"Investigation Link\": \"<#if event_name?starts_with('Cloud')>https://${tenant_id}-my-dev.centrify.io/analytics/ui/#/explore?sql=(%22user_name%22%20IN%20('${user_name}'))&start=%24now-21days&end=%24now-0days&categoryval=behavior&drillview=Category%20Alert&ignoresession=true<#else>https://${tenant_id}-my-dev.centrify.io/analytics/ui/#/explore?sql=(%22user_name%22%20IN%20('${user_name}'))&start=%24now-21days&end=%24now-0days&categoryval=behavior&drillview=Infrastructure%20Server%20Risk&ignoresession=true</#if>\"\n}",
+                  "url":""
+               },
+               "providerMetaData":{
+
+               }
+            }
+         ],
+         "createdBy":"yanlin",
+         "updatedBy":"yanlin"
+      }
+   ],
+   "version":"0.9",
+   "signature":"e4fdae2127b0920e3be4ebaf7ede2fc2"
+}
