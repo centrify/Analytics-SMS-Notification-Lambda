@@ -18,7 +18,30 @@ Login to your AWS Console via your favorite browser, select “Lambda**”** fro
   4. In the “Function code”, choose “Edit code inline” in “Code entry type” drop-down.
   5. Copy and paste following code, remember to replace sns_arn variable with your SNS ARN.
   6. Review the code, settings and click the “Save” button.
-[code language='python'] import json import boto3 sns = boto3.client('sns') def lambda_handler(event, context): print("Received event: " + json.dumps(event, indent=2)) # Replace following with your SNS ARN sns_arn = 'arn:aws:sns:us-west-2:99999999:analytics-demo' sns_event = event sns_event["default"] = json.dumps(event) try: sns.publish( TargetArn=sns_arn, Message=json.dumps(sns_event), MessageStructure='json', Subject="Centrify Analytics Alert" ) except Exception as e: print(e) raise e [/code] This simple example code is using boto3 to publish the webhook payload from Centrify Analytics to the SNS topic, which has your mobile SMS number subscribed to. 
+```python
+import json 
+import boto3 
+
+sns = boto3.client('sns') 
+
+def lambda_handler(event, context): 
+  print("Received event: " + json.dumps(event, indent=2)) 
+  # Replace following with your SNS ARN 
+  sns_arn = 'arn:aws:sns:us-west-2:99999999:analytics-demo' 
+  sns_event = event 
+  sns_event["default"] = json.dumps(event) 
+  try: 
+    sns.publish( 
+      TargetArn=sns_arn, 
+      Message=json.dumps(sns_event), 
+      MessageStructure='json', 
+      Subject="Centrify Analytics Alert" 
+    ) 
+  except Exception as e: 
+    print(e) 
+    raise e 
+```
+This simple example code is using boto3 to publish the webhook payload from Centrify Analytics to the SNS topic, which has your mobile SMS number subscribed to. 
 
 ### Setup AWS API Gateway
 
