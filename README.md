@@ -31,26 +31,55 @@ To make the Lambda function accessible via an HTTP POST, you need to create AWS 
   5. Select the newly created “analyticsdemo” node in “Resources” tree --> choose “Create Method” in “Actions” drop-down --> choose “POST” method for “analyticsdemo” resource.
   6. In the POST method configuration panel  -->  choose “Lambda Function” as “Integration type”  --> choose the proper “Lambda Region”  -->  input your lambda ARN in “Lambda Function”.
   7. Click “Save” button.
-If all went well, you should end up with execution workflow diagram like this: ![api gateway post](https://yanlin286934087.files.wordpress.com/2018/04/api-gateway-post.png)
+If all went well, you should end up with execution workflow diagram like this: 
+
+![api gateway post](https://yanlin286934087.files.wordpress.com/2018/04/api-gateway-post.png)
+
 
 ### Setup API Stage
 
-The stage represents the label of API lifecycle stages, e.g. development, test, production etc. In API console choose your API and the root resource of the API  --> choose “Deploy API” in the “Actions” drop-down: ![api stage](https://yanlin286934087.files.wordpress.com/2018/04/api-stage.png) In this example, I use “demo” as the stage name. 
+The stage represents the label of API lifecycle stages, e.g. development, test, production etc. In API console choose your API and the root resource of the API  --> choose “Deploy API” in the “Actions” drop-down: 
+
+![api stage](https://yanlin286934087.files.wordpress.com/2018/04/api-stage.png) 
+
+In this example, I use “demo” as the stage name. 
+
 
 ### Setup Usage Plan
 
-“Usage Plans” allow you to put control and constraint into your API, e.g. “Rate”, “Burst”, “Quota” etc. If you have setup API usage plan before, you just need to add the newly created API to the usage plan, otherwise, you will need to follow the steps below. Also if you have never used “Usage Plans” and don't see the option in the API console, you will need to enable it in your account. In API console, choose “Usage Plans” and click “Create” button. Follow the wizard and make sure to associate your API and stage with the usage plan in the wizard: ![api usage plan](https://yanlin286934087.files.wordpress.com/2018/04/api-usage-plan.png)
+“Usage Plans” allow you to put control and constraint into your API, e.g. “Rate”, “Burst”, “Quota” etc. If you have setup API usage plan before, you just need to add the newly created API to the usage plan, otherwise, you will need to follow the steps below. Also if you have never used “Usage Plans” and don't see the option in the API console, you will need to enable it in your account. In API console, choose “Usage Plans” and click “Create” button. Follow the wizard and make sure to associate your API and stage with the usage plan in the wizard: 
+
+![api usage plan](https://yanlin286934087.files.wordpress.com/2018/04/api-usage-plan.png)
+
 
 ### Setup API Key
 
-In API console, choose “API Keys”, then choose “Create API key” in “Actions”. Once the API key is created, you can click the newly create API key and click the “Add to Usage Plan” button to link your API key to the usage plan: ![api key](https://yanlin286934087.files.wordpress.com/2018/04/api-key.png) Click “Show” link, copy and save your API key. This API key will be used in the webhooks configuration in Centrify Analytics Portal. 
+In API console, choose “API Keys”, then choose “Create API key” in “Actions”. Once the API key is created, you can click the newly create API key and click the “Add to Usage Plan” button to link your API key to the usage plan: 
+
+![api key](https://yanlin286934087.files.wordpress.com/2018/04/api-key.png) 
+
+Click “Show” link, copy and save your API key. This API key will be used in the webhooks configuration in Centrify Analytics Portal. 
+
 
 ### Deploy
 
-In API console choose your API and the root resource of the API, then choose “Deploy API” in the “Actions” drop-down.  You should use the “demo” stage to deploy the API. After deploy, your API is now ready to use and you can find "invoke URL" from the stage editor: ![deploy stage](https://yanlin286934087.files.wordpress.com/2018/04/deploy-stage1.png)
+In API console choose your API and the root resource of the API, then choose “Deploy API” in the “Actions” drop-down.  You should use the “demo” stage to deploy the API. After deploy, your API is now ready to use and you can find "invoke URL" from the stage editor: 
+
+![deploy stage](https://yanlin286934087.files.wordpress.com/2018/04/deploy-stage1.png)
+
 
 ### Setup Centrify Analytics Webhook
 
-Log in Centrify Analytics portal and navigate to Settings -> Webhooks. Click “New” button: ![analytics webhook](https://yanlin286934087.files.wordpress.com/2018/04/analytics-webhook.png) The webhook can be also imported from “Anomaly Detection Notification.json“ which is located in this Github [repository](https://github.com/centrify/Analytics-Notification-Lambda). 
+Log in Centrify Analytics portal and navigate to Settings -> Webhooks. Click “New” button: 
+
+![analytics webhook](https://yanlin286934087.files.wordpress.com/2018/04/analytics-webhook.png) 
+
+The webhook can be also imported from “Anomaly Detection Notification.json“ which is located in this Github [repository](https://github.com/centrify/Analytics-SMS-Notification-Lambda). 
 
 ### End to end Testing
+
+Now, whenever there is a SecurityAlert event generated in your Centrify Analytics Service, you should get the SMS notification on your mobile devices:
+
+![sms.png](https://yanlin286934087.files.wordpress.com/2018/04/sms.png?w=692&h=1230)
+
+The code for this sample is available in this Github [repository](https://github.com/centrify/Analytics-SMS-Notification-Lambda). 
