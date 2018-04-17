@@ -1,6 +1,6 @@
 # Create Analytics SMS Notification by Using AWS Lambda  
 
-This is an example of developing an AWS Lambda function which will send an SMS or email when there is Centrify Analytics Alert. By extending the AWS Lambda function from this simple example, you can archive more sophisticated remediation tasks such as kill the session or ban the IP address etc. ![lambda.png](https://yanlin286934087.files.wordpress.com/2018/04/lambda1.png)
+This is an example of developing an AWS Lambda function which will send an SMS or email when there is Centrify Analytics Alert. By extending the AWS Lambda function from this simple example, you can archive more sophisticated remediation tasks such as kill the session or ban the IP address etc. ![Lambda](https://cdn-images-1.medium.com/max/1600/1*JbMcDASTiuq-iVbw1TRPYg.png)
 
 ### Create SNS Topic
 
