@@ -1,5 +1,11 @@
 # Create Analytics SMS Notification by Using AWS Lambda  
 
+# PUBLIC ARCHIVE
+
+> ***NOTE***
+> This repo is archived.
+> This is still available under the licensing terms, but is not being actively developed or updated any further. Please see [DelineaXPM](https://github.com/DelineaXPM) for active projects.
+
 This is an example of developing an AWS Lambda function which will send an SMS or email when there is Centrify Analytics Alert. By extending the AWS Lambda function from this simple example, you can archive more sophisticated remediation tasks such as kill the session or ban the IP address etc. ![Lambda](https://cdn-images-1.medium.com/max/1600/1*JbMcDASTiuq-iVbw1TRPYg.png)
 
 ### Create SNS Topic
